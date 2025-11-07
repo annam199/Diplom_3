@@ -1,5 +1,6 @@
 package praktikum.core;
 
+import io.qameta.allure.Step;
 import praktikum.models.LoginCredentials;
 import praktikum.models.User;
 import praktikum.utils.ApiHelper;
@@ -10,10 +11,7 @@ import praktikum.utils.TestUtils;
  */
 public class UserTestHelper {
 
-    /**
-     * Генерация нового тестового пользователя
-     * @return Созданный пользователь
-     */
+    @Step("Сгенерировать пользователя")
     public static User generateUser() {
         String name = TestUtils.generateName();
         String email = TestUtils.generateEmail();
@@ -21,11 +19,7 @@ public class UserTestHelper {
         return new User(email, password, name);
     }
 
-    /**
-     * Регистрация пользователя
-     * @param user Пользователь для регистрации
-     * @return Токен доступа
-     */
+    @Step("Зарегистрировать и авторизовать пользователя")
     public static String registerAndLogin(User user) {
         // Регистрация пользователя
         ApiHelper.registerUser(user).assertThat().statusCode(200);
@@ -39,10 +33,7 @@ public class UserTestHelper {
         return ApiHelper.extractAccessToken(loginResponse);
     }
 
-    /**
-     * Удаление пользователя по токену
-     * @param accessToken Токен доступа пользователя
-     */
+    @Step("Удалить пользователя")
     public static void deleteUser(String accessToken) {
         if (accessToken != null && !accessToken.isEmpty()) {
             try {

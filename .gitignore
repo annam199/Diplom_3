@@ -65,3 +65,5 @@ hs_err_pid*
 # Preserve Allure report files
 !allure-results/
 !allure-report/
+
+.allure

@@ -45,12 +45,6 @@ public class BasePage {
                 return;
             } catch (ElementClickInterceptedException e) {
                 System.out.println("ElementClickInterceptedException on attempt " + (attempts + 1) + ". Retrying with JS click...");
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException(ie);
-                }
                 WebElement element = driver.findElement(locator);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
@@ -60,11 +54,6 @@ public class BasePage {
                 attempts++;
                 if (attempts >= 2) {
                     throw e;
-                }
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
                 }
             }
         }
