@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends BasePage {
 
+    public By counter = By.xpath("//div[contains(@class, 'counter_counter__')]");
+
     // Кнопки и основные элементы
     private By loginButton = By.xpath("//button[text()='Войти в аккаунт']");
     private By personalAccountButton = By.xpath("//p[text()='Личный Кабинет']");
@@ -130,8 +132,7 @@ public class MainPage extends BasePage {
     @Step("Добавление ингредиента в конструктор")
     public void addIngredientToBurger(By ingredientLocator) {
         click(ingredientLocator);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[contains(@class, 'counter_counter__')]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(counter));
     }
 
     @Step("Получение ID заказа")

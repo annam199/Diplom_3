@@ -31,18 +31,6 @@ public class RegistrationTests extends BaseTest {
         loginPage.waitForPageToLoad();
         assertTrue("Не произошел переход на страницу входа после успешной регистрации",
                 loginPage.isLoginFormDisplayed());
-        var loginResponse = ApiHelper.loginUser(new LoginCredentials(email, password));
-        if (loginResponse.extract().statusCode() == 200) {
-            String token = ApiHelper.extractAccessToken(loginResponse);
-            if (token != null && !token.isEmpty()) {
-                try {
-                    var deleteResponse = ApiHelper.deleteUser("Bearer " + token);
-                    System.out.println("Delete user API response status (registration test): " + deleteResponse.getStatusCode());
-                } catch (Exception e) {
-                    System.err.println("Error deleting user after registration test: " + e.getMessage());
-                }
-            }
-        }
     }
 
     @Test
